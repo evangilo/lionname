@@ -6,7 +6,7 @@ class User {
 	String username
 	String password
 	
-	static hasMany = [posts: Post]
+	
 	static hasMany = [followers: User]
 
     static constraints = {
