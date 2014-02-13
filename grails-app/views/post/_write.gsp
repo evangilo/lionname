@@ -13,15 +13,7 @@
 		$('#message').limit('140','#charsLeft');
 
 		$('#postForm').submit({
-			$.ajax({
-				type:'POST',
-				data: JSON.stringify($('#postForm').serializeJSON()),
-				url: <g:createLink controller="Post" action="save" />,
-				success:function(data,textStatus){
-					alert("Funfou");
-				},
-
-			});	
+			
 		});
 	});
 
@@ -30,6 +22,16 @@
 		if (isValid) {
 			var json = JSON.stringify($('#message').serializeJSON());
 			var dados = {'json': json}
+
+			$.ajax({
+				type:'POST',
+				data: dados,
+				url: <g:createLink controller="Post" action="save" />,
+				success:function(data,textStatus){
+					alert(data);
+				}
+
+			});	
 		}
 	});
 	
