@@ -15,5 +15,10 @@ class User {
 		password nullable: false, blank: false, password: true
 		followers nullable: true
     }
+	
+	@Override
+	public String toString() {
+		return "Lionname: $lionname Username $username" ;
+	}
 
 }

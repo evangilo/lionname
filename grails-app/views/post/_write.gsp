@@ -11,10 +11,14 @@
 			
 		});
 
-		$('#submitButton').click(function(){
-			var isValid = $('#message').text == "";
+		$('.post').click(function(){
+			var repost = !$(this).attr("id") == "submitButton"
+			console.log(repost)
+			var message = $('#message').val()
+			var isValid = message == "";
 			if (!isValid) {
-				var json = JSON.stringify($('#message').serializeJSON());
+				var json = JSON.stringify({'message': message, 'author': "${session.user.id}", 'repost': repost});
+								
 				var dados = {'json': json}
 
 				$.ajax({
@@ -22,7 +26,7 @@
 					data: dados,
 					url: "<g:createLink controller="Post" action="save" />",
 					success:function(data,textStatus){
-						alert(data);
+						console.log(data)
 					}
 
 				});	
@@ -42,7 +46,7 @@
 			<small class=	"hidden"><span id="charsLeft"></span> <g:message code="chars.left.message"/></small>
 		</div>
 		<div class="form-group col-lg-4 hidden">
-			<button type="button" class="btn btn-primary" id="submitButton"><g:message code="default.button.post.label" /></button>
+			<button type="button" class="btn btn-primary post" id="submitButton" ><g:message code="default.button.post.label" /></button>
 		</div>
 	</div>
 </form>

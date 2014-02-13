@@ -13,6 +13,7 @@
 
 					if (isValid) {
 						var json = JSON.stringify($('#loginForm').serializeJSON());
+
 						var dados = {'json': json};
 						$.ajax({
 					        url: "${createLink(controller: 'user', action: 'login')}",
