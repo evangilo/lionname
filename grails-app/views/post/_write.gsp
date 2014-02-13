@@ -24,6 +24,15 @@
 			});	
 		});
 	});
+
+	$('#submitButton').click(function(){
+		var isValid = $('#message').text == "";
+		if (isValid) {
+			var json = JSON.stringify($('#message').serializeJSON());
+			var dados = {'json': json}
+		}
+	});
+	
 </script>
 <form role="form" class="form-vertical" id="postForm" style="margin-top: 40px;">
 	<g:hiddenField name="date" value="${new Date()}" />
