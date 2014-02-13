@@ -9,7 +9,7 @@ class PostController {
 	}
 	
 	def save() {
-		def json = JSON.parse(params.json)
+		/*def json = JSON.parse(params.json)
 		def post = new Post(json)
 		
 		if (user.save(flush: true)) {
@@ -18,6 +18,8 @@ class PostController {
 			render message
 		} else {
 		render status: 500, text: g.message(code: 'default.registry.created.error')
-		}
+		}*/
+		
+		render "xxxx"
 	}
 }

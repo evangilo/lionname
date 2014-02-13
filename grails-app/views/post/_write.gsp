@@ -4,36 +4,34 @@
 			$('#message').autosize({append: "\n"});
 			$('form .hidden').removeClass('hidden');
 		});
-		$('#message').blur(function() {
-			$('#message').trigger('autosize.destroy');
-			$('#message').val('');
-			$('form small').addClass('hidden');
-			$('form .col-lg-4').addClass('hidden');
-		});
+
 		$('#message').limit('140','#charsLeft');
 
 		$('#postForm').submit({
 			
 		});
+
+		$('#submitButton').click(function(){
+			var isValid = $('#message').text == "";
+			if (!isValid) {
+				var json = JSON.stringify($('#message').serializeJSON());
+				var dados = {'json': json}
+
+				$.ajax({
+					type:'POST',
+					data: dados,
+					url: "<g:createLink controller="Post" action="save" />",
+					success:function(data,textStatus){
+						alert(data);
+					}
+
+				});	
+			}
+		});
+		
 	});
 
-	$('#submitButton').click(function(){
-		var isValid = $('#message').text == "";
-		if (isValid) {
-			var json = JSON.stringify($('#message').serializeJSON());
-			var dados = {'json': json}
-
-			$.ajax({
-				type:'POST',
-				data: dados,
-				url: <g:createLink controller="Post" action="save" />,
-				success:function(data,textStatus){
-					alert(data);
-				}
-
-			});	
-		}
-	});
+	
 	
 </script>
 <form role="form" class="form-vertical" id="postForm" style="margin-top: 40px;">
