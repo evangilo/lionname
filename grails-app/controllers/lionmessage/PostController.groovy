@@ -2,22 +2,29 @@ package lionmessage
 
 import java.util.Date;
 
+import grails.converters.JSON
+import groovy.json.JsonBuilder
 class PostController {
 
-    def write() {
+	def write() {
 		render view: 'write', model: [post: new Post()]
 	}
-	
+
 	def save() {
 		def json = JSON.parse(params.json)
-		def post = new Post(json)
-		
-		if (user.save(flush: true)) {
-			def link = g.createLink(action: 'prePost')
-			def message = "postagem realizada!"
-			render message
-		} else {
-		render status: 500, text: g.message(code: 'default.registry.created.error')
+		def user = User.get(json.author)
+
+		def post = new Post()
+
+		post.author = user
+		post.date = new Date()
+		post.message = json.message
+		post.repost = json.repost
+
+		if (post.save(flush: true)) {
+			render post as JSON
+		}else {
+			post.errors.allErrors.each{ println it }
 		}
 	}
 }
