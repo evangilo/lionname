@@ -4,22 +4,24 @@
 	</h1>
 	<div id="connectDiv">
 		<hr>
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-hover" >
 	    	<thead>
 	    		<tr>
 	    			<th>Nome</th>
 	    			<th>&nbsp;</th>
 	    		</tr>
 	    	</thead>
-	    	<tbody>
-		    	<tr>
-		    		<td>Maria José</td>
-		    		<td>
-		    			<a href="#" tooltip="true" data-toggle="tooltip"
-							data-placement="right" title="${message(code: 'default.unfollow.message.label')}">
-						<i class="fa fa-arrow-down"></i></a>
-		    		</td>
-		    	</tr>
+	    	<tbody id="following">
+	    		<g:each in="${following}" status="i" var="user">
+			    	<tr>
+			    		<td>${user.lionname}</td>
+			    		<td>
+			    			<a href="#" tooltip="true" data-toggle="tooltip"
+								data-placement="right" title="${message(code: 'default.follow.message.label')}">
+							<i class="fa fa-arrow-right"></i></a>
+			    		</td>
+			    	</tr>
+		    	</g:each>
 	    	</tbody>
 	    </table>
 	</div>
@@ -45,32 +47,29 @@
 	    		</tr>
 	    	</thead>
 	    	<tbody>
-		    	<tr>
-		    		<td>Leo Silva</td>
-		    		<td>
-		    			<a href="#" tooltip="true" data-toggle="tooltip"
-							data-placement="right" title="${message(code: 'default.follow.message.label')}">
-						<i class="fa fa-arrow-right"></i></a>
-		    		</td>
-		    	</tr>
-		    	<tr>
-		    		<td>Maria José</td>
-		    		<td>
-		    			<span class="label label-default"><g:message code="default.following.label"/></span>
-		    		</td>
-		    	</tr>
-		    	<tr>
-		    		<td>José Maria</td>
-		    		<td>
-		    			<a href="#" tooltip="true" data-toggle="tooltip"
-							data-placement="right" title="${message(code: 'default.follow.message.label')}">
-						<i class="fa fa-arrow-right"></i></a>
-		    		</td>
-		    	</tr>
+				<g:each in="${users}" status="i" var="user">
+			    	<tr>
+			    		<td>${user.lionname}</td>
+			    		<td>
+			    			<a href="#" onclick='follow("<g:createLink controller="User" action="follow" id="${user.id}" />")' tooltip="true" data-toggle="tooltip"
+								data-placement="right" title="${message(code: 'default.follow.message.label')}">
+							<i class="fa fa-arrow-right"></i></a>
+			    		</td>
+			    	</tr>
+		    	</g:each>
 	    	</tbody>
 	    </table>
 	</div>
 </div>
 <script>
-	$('a[tooltip=true]').tooltip()
+	$('a[tooltip=true]').tooltip();
+	function follow(link){
+		$.ajax({
+			url: link,
+			success: function(data) {
+				$("#following").append("<tr><td>"+data.lionname+"</td><td></td></tr>");
+				//console.log(data)
+			}
+		});
+	}
 </script>

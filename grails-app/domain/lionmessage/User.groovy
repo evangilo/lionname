@@ -7,18 +7,18 @@ class User {
 	String password
 	
 	
-	static hasMany = [followers: User]
+	static hasMany = [following: User]
 
     static constraints = {
 		lionname nullable: false, blank: false, unique: true
 		username nullable: false, blank: false
 		password nullable: false, blank: false, password: true
-		followers nullable: true
+		following nullable: true
     }
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return "Lionname: $lionname Username $username" ;
-	}
+	}*/
 
 }

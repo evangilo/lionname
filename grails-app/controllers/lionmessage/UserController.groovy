@@ -86,9 +86,20 @@ class UserController {
 			render status: 500, text: g.message(code: 'user.lionname.exists', args: [params.lionname])
 		} else {
 			render status: 200
-		}
+		}	
 	}
 
-	
+	def follow(){
+		def follower = User.get(session.user.id)
+		def user = User.get(params.id)
+		follower.following.add(user)
+		
+		follower.save(flush: true)
+		def jsonBuilder = new JsonBuilder()
+		def returnJson = jsonBuilder {
+			lionname user.lionname
+		}
+		render returnJson as JSON
+	}
 	
 }
