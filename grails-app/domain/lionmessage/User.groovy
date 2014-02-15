@@ -16,9 +16,9 @@ class User {
 		following nullable: true
     }
 	
-	/*@Override
+	@Override
 	public String toString() {
-		return "Lionname: $lionname Username $username" ;
-	}*/
+		return username
+	}
 
 }

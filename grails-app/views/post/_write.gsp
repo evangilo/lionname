@@ -1,3 +1,4 @@
+
 <script>
 	$(document).ready(function() {
 		$('#message').focus(function() {
@@ -27,7 +28,8 @@
 					data: dados,
 					url: "<g:createLink controller="Post" action="save" />",
 					success:function(data,textStatus){
-						console.log(data)
+						$('#timelinePosts').prepend(data)
+						
 					}
 
 				});	

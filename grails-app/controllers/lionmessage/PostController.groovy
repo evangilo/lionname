@@ -22,9 +22,18 @@ class PostController {
 		post.repost = json.repost
 
 		if (post.save(flush: true)) {
-			render post as JSON
+			render (template: "/post/post", model: [post: post])
 		}else {
 			post.errors.allErrors.each{ println it }
 		}
+	}
+	
+	def generateJSON(post) {
+		def json = [
+			'author': post.author.username,
+			'message': post.message,
+			'date': post.date,
+			'repost': post.repost
+		]
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Esta fun‹o coloca um conteœdo HTML em algum elemento do DOM, recuperado atravs do seu ID.
+ * Esta funï¿½ï¿½o coloca um conteï¿½do HTML em algum elemento do DOM, recuperado atravï¿½s do seu ID.
  * @param target
  * @param content
  */
@@ -8,7 +8,7 @@ function placeContent(target, content) {
 }
 
 /**
- * Esta fun‹o cancela uma a‹o do usu‡rio e o redireciona para uma nova p‡gina, a ser recebida como par‰metro.
+ * Esta funï¿½ï¿½o cancela uma aï¿½ï¿½o do usuï¿½rio e o redireciona para uma nova pï¿½gina, a ser recebida como parï¿½metro.
  * @param newLocation
  */
 function goToPage(newLocation) {
@@ -16,7 +16,7 @@ function goToPage(newLocation) {
 }
 
 /**
- * Fun‹o para exibir mensagens no estilo Growl
+ * Funï¿½ï¿½o para exibir mensagens no estilo Growl
  * @param message
  * @param type (pode ser 'info', 'danger', 'waring', 'success' ou null)
  */
@@ -32,7 +32,7 @@ function showMessage(message, type) {
 }
 
 /**
- * Fun‹o que supervisiona o formul‡rio, validando campos obrigat—rios.
+ * Funï¿½ï¿½o que supervisiona o formulï¿½rio, validando campos obrigatï¿½rios.
  * @param formId
  */
 function preValidateRequiredFields(formId) {
@@ -49,7 +49,7 @@ function preValidateRequiredFields(formId) {
 }
 
 /**
- * Func‹o que retorna true ou false informando se o formul‡rio  v‡lido, quanto aos elementos obrigat—rios.
+ * Funcï¿½o que retorna true ou false informando se o formulï¿½rio ï¿½ vï¿½lido, quanto aos elementos obrigatï¿½rios.
  * @param formId
  * @returns true ou false
  */
@@ -72,3 +72,9 @@ function markInput(inputId, type) {
 		$('#' + inputId).siblings().first().removeClass('hidden');
 	}
 }
+
+function createPost(json) {
+	$('#timelinePosts').prepend(json.author)
+}
+
+

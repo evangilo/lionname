@@ -10,10 +10,4 @@ class Post {
     static constraints = {
 		message maxLength: '140'
     }
-	
-	
-	@Override
-	public String toString() {
-		return "Postado por ${author.username} em ${date}"
-	}
 }
