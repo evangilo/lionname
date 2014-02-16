@@ -22,26 +22,13 @@ class PostController {
 		post.repost = json.repost
 
 		if (post.save(flush: true)) {
-
-			def posts = criteria{
-				or {
-					author { eq "username", user.username }
-					if (user.following) {
-						author {
-							'in' "username", user.following.username
-						}
-					}
-				}
-				order 'date', 'desc'
-				maxResults 10
-			}
-
-			render (template: "/post/post", model: [posts: posts])
+			return generateJSON(post) as JSON
+			//render (template: "/post/post", model: [post: post])
 		}else {
 			post.errors.allErrors.each{ println it }
 		}
 	}
-
+	
 	def generateJSON(post) {
 		def json = [
 			'author': post.author.username,
@@ -50,6 +37,4 @@ class PostController {
 			'repost': post.repost
 		]
 	}
-
-	def criteria = Post.createCriteria()
 }

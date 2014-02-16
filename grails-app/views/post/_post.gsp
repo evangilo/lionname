@@ -2,6 +2,7 @@
 <%@ page import="lionmessage.Post"%>
 <%@ page import="java.text.DateFormat"%>
 
+<g:each var="post" in="${posts}">
 <hr>
 <p>
 
@@ -24,3 +25,4 @@
 <p>
 	${post.message}
 </p>
+</g:each>

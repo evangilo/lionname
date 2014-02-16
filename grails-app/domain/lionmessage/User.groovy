@@ -7,7 +7,7 @@ class User {
 	String password
 	
 	
-	static hasMany = [following: User]
+	static hasMany = [following: User, posts: Post]
 
     static constraints = {
 		lionname nullable: false, blank: false, unique: true

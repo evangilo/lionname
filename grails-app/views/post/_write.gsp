@@ -28,7 +28,8 @@
 					data: dados,
 					url: "<g:createLink controller="Post" action="save" />",
 					success:function(data,textStatus){
-						$('#timelinePosts').prepend(data)
+						<!--$('#timelinePosts').prepend(data)-->
+						$('#timelinePosts').html(data)
 						
 					}
 
