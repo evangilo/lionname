@@ -14,12 +14,10 @@
 		});
 
 		$('.post').click(function(){
-			var repost = !$(this).attr("id") == "submitButton"
-			console.log(repost)
 			var message = $('#message').val()
 			var isValid = message == "";
 			if (!isValid) {
-				var json = JSON.stringify({'message': message, 'author': "${session.user.id}", 'repost': repost});
+				var json = JSON.stringify({'message': message, 'author': "${session.user.username}"});
 								
 				var dados = {'json': json}
 
@@ -36,8 +34,33 @@
 				});	
 			}
 		});
-		
+
+	
 	});
+
+	function repost(post) {
+		var message =  document.getElementById("message_" + post.id).firstChild.nodeValue 
+		var author = document.getElementById(post.id).className
+
+		var json = JSON.stringify({'message': message, 'author': author});
+		
+		var dados = {'json': json}
+
+		$.ajax({
+			type:'POST',
+			data: dados,
+			url: "<g:createLink controller="Post" action="save" />",
+			success:function(data,textStatus){
+				<!--$('#timelinePosts').prepend(data)-->
+				$('#timelinePosts').html(data)
+				
+			}
+
+		});
+
+		
+	}
+
 
 </script>
 <form role="form" class="form-vertical" id="postForm" style="margin-top: 40px;">
