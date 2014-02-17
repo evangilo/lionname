@@ -16,9 +16,9 @@
 			    	<tr>
 			    		<td>${user.lionname}</td>
 			    		<td>
-			    			<a href="#" tooltip="true" data-toggle="tooltip"
+			    			<a href="#" onclick='unfollow("<g:createLink controller="User" action="unfollow" id="${user.id}" />")' tooltip="true" data-toggle="tooltip"
 								data-placement="right" title="${message(code: 'default.follow.message.label')}">
-							<i class="fa fa-arrow-right"></i></a>
+							<i class="fa fa-arrow-down"></i></a>
 			    		</td>
 			    	</tr>
 		    	</g:each>
@@ -67,8 +67,18 @@
 		$.ajax({
 			url: link,
 			success: function(data) {
-				$("#following").append("<tr><td>"+data.lionname+"</td><td><a href='#' tooltip='true' datatoggle='tooltip' data-placement='right' title='${message(code: 'default.follow.message.label')}'><i class='fa fa-arrow-right'></i></a></td></tr>");
+				$("#following").append("<tr><td>"+data.lionname+"</td><td><a href='#' onclick=\"unfollow('/lionmessage/user/unfollow/"+data.id+"')\" tooltip='true' datatoggle='tooltip' data-placement='right' title='${message(code: 'default.follow.message.label')}'><i class='fa fa-arrow-down'></i></a></td></tr>");
 				//console.log(data)
+			}
+		});
+
+	}
+
+	function unfollow(link){
+		$.ajax({
+			url: link,
+			success: function(){
+				$("#mainDiv").load("${createLink(controller: 'connection', action: 'listConnections')}")
 			}
 		});
 	}
