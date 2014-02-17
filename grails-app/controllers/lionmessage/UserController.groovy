@@ -98,6 +98,7 @@ class UserController {
 		def jsonBuilder = new JsonBuilder()
 		def returnJson = jsonBuilder {
 			lionname user.lionname
+			id user.id
 		}
 		render returnJson as JSON
 	}
@@ -115,5 +116,10 @@ class UserController {
 		render returnJson as JSON
 		//render users
 	}
-	def unfollow 
+	def unfollow(){
+		def user = User.get(params.id)
+		def follower = User.get(session.user.id)
+		follower.following.remove(user)
+		render status:200
+	}
 }
