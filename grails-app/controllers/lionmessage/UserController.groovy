@@ -101,5 +101,19 @@ class UserController {
 		}
 		render returnJson as JSON
 	}
-	
+
+	def findFriends(){
+		def users = User.findAllByLionname(params.lionname)
+		def jsonBuilder = new JsonBuilder()
+		def returnJson = jsonBuilder {
+			users.each({
+				id it.id
+				lionname it.lionname
+			})
+		}
+
+		render returnJson as JSON
+		//render users
+	}
+	def unfollow 
 }
