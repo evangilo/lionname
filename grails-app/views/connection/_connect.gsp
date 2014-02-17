@@ -17,8 +17,8 @@
 			    		<td>${user.lionname}</td>
 			    		<td>
 			    			<a href="#" tooltip="true" data-toggle="tooltip"
-								data-placement="right" title="${message(code: 'default.follow.message.label')}">
-							<i class="fa fa-arrow-right"></i></a>
+								data-placement="right" title="${message(code: 'default.unfollow.message.label')}">
+							<i class="fa fa-arrow-down"></i></a>
 			    		</td>
 			    	</tr>
 		    	</g:each>
@@ -48,6 +48,8 @@
 	    	</thead>
 	    	<tbody id="hoToFollow">
 				<g:each in="${users}" status="i" var="user">
+					<!-- não mostrar o seu nome na tabela -->
+					<g:if test="${user.lionname != session.user.lionname}"> 
 			    	<tr>
 			    		<td>${user.lionname}</td>
 			    		<td>
@@ -56,6 +58,7 @@
 							<i class="fa fa-arrow-right"></i></a>
 			    		</td>
 			    	</tr>
+			    	</g:if>
 		    	</g:each>
 	    	</tbody>
 	    </table>
