@@ -13,7 +13,7 @@
 	
 	<div id="timelinePosts">
 		<script>
-		$('#timelinePosts').load("<g:createLink controller="Post" action="refreshTimeline" />");
+		$('#timelinePosts').hide().load("<g:createLink controller="Post" action="refreshTimeline" />").show();
 		</script>
 		<hr>
 		<p>
