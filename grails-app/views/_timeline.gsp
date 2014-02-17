@@ -12,10 +12,13 @@
 	</g:else>
 	
 	<div id="timelinePosts">
+		<script>
+		$('#timelinePosts').load("<g:createLink controller="Post" action="refreshTimeline" />");
+		</script>
 		<hr>
 		<p>
 			<i class="fa fa-clock-o"></i>
-			<g:message code="default.timeline.repost.message"	args="["${session?.user?.username}", 'February, 8, 2014', '23:40', 'Maria José']" />
+			<g:message code="default.timeline.repost.message"	args="['Leo Silva', 'February, 8, 2014', '23:40', 'Maria José']" />
 			<g:if test="${session.user}">
 				<!--<g:if test="${session?.user?.username != post?.author?.username}"></g:if> -->
 				<g:if test="${false}">

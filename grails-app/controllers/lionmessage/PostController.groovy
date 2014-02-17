@@ -12,22 +12,25 @@ class PostController {
 
 	def save() {
 		def json = JSON.parse(params.json)
-		def user = User.get(json.author)
+		//def user = User.get(json.author)
 
 		def post = new Post()
 
-		post.author = user
+		post.author = User.get(session.user.id)
+		post.authorRepost = json.author
 		post.date = new Date()
 		post.message = json.message
-		post.repost = json.repost
+		//post.repost = json.repost
+		
+		println post.author.username == post.authorRepost
 
 		if (post.save(flush: true)) {
-			render (template: "/post/post", model: [post: post])
+			refreshTimeline()
 		}else {
 			post.errors.allErrors.each{ println it }
 		}
 	}
-	
+
 	def generateJSON(post) {
 		def json = [
 			'author': post.author.username,
@@ -36,4 +39,24 @@ class PostController {
 			'repost': post.repost
 		]
 	}
+	
+	def refreshTimeline() {
+		def user = User.get(session.user.id)
+		def posts = criteria{
+			or {
+				author { eq "username", user.username }
+				if (user.following) {
+					author {
+						'in' "username", user.following.username
+					}
+				}
+			}
+			order 'date', 'desc'
+			maxResults 10
+		}
+
+		render (template: "/post/post", model: [posts: posts])
+	}
+
+	def criteria = Post.createCriteria()
 }

@@ -4,7 +4,7 @@
 		<meta name="layout" content="main"/>
 		<title>Lion Message</title>
 	</head>
-	<body>
+	<body onload="refleshTimeline()">
 	    <!-- Page Content -->
 	    <div class="container" id="containerDiv">
 	        <div class="row">
